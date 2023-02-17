@@ -5,35 +5,39 @@ interface user_interface {
   index: number;
   notify(String): void;
 }
-/*
-interface Users_interface{
-  name:string,
-  userList:[],
-  addUser(user_interface):void,
-  notifyObserver(any):void
-}*/
+
+interface Users_interface {
+  name: String;
+  userList: [];
+  addUser(user_interface: user_interface): void;
+  notifyObserver(String): void;
+}
 
 const usersGroupList = [];
-
-/*const UsersGroup = {//群組
-  userList: [],
-  addUser: (user) => {
-    UsersGroup.userList.push(user);
-    console.log(`user ${user.index} is add`);
-  },
-  notifyObserver: (msg) => {
-    UsersGroup.userList.forEach((obs) => {
-      obs.notify(msg);
-    });
-  },
-};*/
+/*
 function createUsersGroup(name: String) {
   let UsersGroup = {
     name: name,
     userList: [],
-    addUser: (user) => {
-      UsersGroup.userList.push(user);
-      console.log(`user ${user.index} is add`);
+    addUser: (user_interface) => {
+      UsersGroup.userList.push(user_interface);
+      console.log(`user ${user_interface.index} is add`);
+    },
+    notifyObserver: (msg) => {
+      UsersGroup.userList.forEach((obs) => {
+        obs.notify(msg);
+      });
+    },
+  };
+  usersGroupList.push(UsersGroup);
+}*/
+function createUsersGroup(name: String) {
+  let UsersGroup: Users_interface = {
+    name: name,
+    userList: [],
+    addUser: (user_interface) => {
+      UsersGroup.userList.push(user_interface);
+      console.log(`user ${user_interface.index} is add`);
     },
     notifyObserver: (msg) => {
       UsersGroup.userList.forEach((obs) => {
@@ -56,13 +60,6 @@ function createUser(name: string, id: number) {
       console.log(`by id = ${user.index} 的通知,${msg}`);
     },
   };
-  /*
-  let userGroup = usersGroupList
-    .filter(usersGroup => !(usersGroup.name).indexOf(name))
-    //.map(userGroup => userGroup.name === name)
-    //.filter(bool => bool == true)
-  //console.log(userGroup);
-  userGroup[0].addUser(user);*/
   position_name([...usersGroupList], name).addUser(user);
 }
 
@@ -84,19 +81,6 @@ createUser('techer1', 14);
 createUser('techer1', 15);
 createUser('techer1', 16);
 
-/*
-getUser(10);
-getUser(11);
-
-UsersGroup.notifyObserver('Hello word');
-
-getUser(12);
-UsersGroup.notifyObserver('第二次群體通知');*/
-/*
-let userGroup = usersGroupList
-    .filter(usersGroup => !(usersGroup.name).indexOf("techer2"))
-userGroup[0].notifyObserver('Hello word');
-*/
 position_name([...usersGroupList], 'techer2').notifyObserver(
   '第二次測試群體通知'
 );
